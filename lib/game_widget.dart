@@ -1,7 +1,10 @@
 part of "game_engine.dart";
 
 abstract class GameWidget extends StatefulWidget {
+  /// Size of the game canvas.
   final Size size;
+
+  /// Fit for internal FittedBox.
   final BoxFit fit;
 
   const GameWidget({super.key, required this.size, this.fit = BoxFit.contain});
@@ -9,11 +12,13 @@ abstract class GameWidget extends StatefulWidget {
   @override
   State<GameWidget> createState() => _GameWidgetState();
 
-  // Gets called when the widget is initialized.
+  /// Gets called when the widget is initialized.
   void init(GameStateManager manager);
-  // Gets called on every call to the game loop.
+
+  /// Gets called on every call to the game loop.
   void update(GameStateManager manager);
-  // Gets called on every call to the rebuild of the canvas.
+
+  /// Gets called on every call to the rebuild of the canvas.
   void draw(Canvas canvas, GameStateManager manager);
 }
 
