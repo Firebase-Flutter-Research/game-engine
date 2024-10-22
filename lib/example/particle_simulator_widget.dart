@@ -25,7 +25,7 @@ class ParticleSimulatorWidget extends GameWidget {
   }
 
   @override
-  void update(GameStateManager manager) {
+  void update(double deltaTime, GameStateManager manager) {
     if (manager.pointerDown) {
       manager.addInstance(Dot(
           direction: Offset.zero,

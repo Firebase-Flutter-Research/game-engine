@@ -18,7 +18,7 @@ class Wall extends GameObject {
   void init(GameStateManager manager) {}
 
   @override
-  void update(GameStateManager manager) {}
+  void update(double deltaTime, GameStateManager manager) {}
 }
 
 class Dot extends GameObject {
@@ -55,7 +55,7 @@ class Dot extends GameObject {
   }
 
   @override
-  void update(GameStateManager manager) {
+  void update(double deltaTime, GameStateManager manager) {
     if (attached) {
       if (manager.pointerUp) {
         final direction = startPosition - manager.pointerPosition;
@@ -63,26 +63,26 @@ class Dot extends GameObject {
           manager.removeInstance(instance: this);
         } else {
           this.direction =
-              normalize(direction) * min(direction.distance * 0.075, 4);
+              normalize(direction) * min(direction.distance * 4, 200);
         }
         attached = false;
       }
       position = manager.pointerPosition - hitBox!.size / 2;
     } else {
       if (manager
-          .getCollisions(this, position + direction.scale(1, 0))
+          .getCollisions(this, position + direction.scale(1, 0) * deltaTime)
           .whereType<Wall>()
           .isNotEmpty) {
         direction = direction.scale(-1, 1);
       }
       if (manager
-          .getCollisions(this, position + direction.scale(0, 1))
+          .getCollisions(this, position + direction.scale(0, 1) * deltaTime)
           .whereType<Wall>()
           .isNotEmpty) {
         direction = direction.scale(1, -1);
       }
       final dots = manager
-          .getCollisions(this, position + direction)
+          .getCollisions(this, position + direction * deltaTime)
           .where((e) => e is Dot && !e.attached);
       if (dots.isNotEmpty) {
         final other = dots.first as Dot;
@@ -94,7 +94,7 @@ class Dot extends GameObject {
           other.direction += selfProjection - otherProjection;
         }
       }
-      position += direction;
+      position += direction * deltaTime;
     }
   }
 

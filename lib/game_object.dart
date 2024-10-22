@@ -12,8 +12,8 @@ abstract class GameObject {
   /// Gets called when the object has been instantiated in the game state.
   void init(GameStateManager manager);
 
-  /// Gets called on every call to the game loop.
-  void update(GameStateManager manager);
+  /// Gets called on every call to the game loop. Delta time is the seconds between frames.
+  void update(double deltaTime, GameStateManager manager);
 
   /// Gets called on every call to the rebuild of the canvas.
   void draw(Canvas canvas, GameStateManager manager);

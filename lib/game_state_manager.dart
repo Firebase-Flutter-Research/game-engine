@@ -16,10 +16,13 @@ class GameStateManager {
 
   /// Get if the pointer was clicked on this frame.
   bool get pointerDown => _pointerDown;
+
   /// Get if the pointer was released on this frame.
   bool get pointerUp => _pointerUp;
+
   /// Get if the pointer is currently being clicked.
   bool get pointerClicking => _pointerClicking;
+
   /// Get the current position of the pointer.
   Offset get pointerPosition => _pointerPosition;
 
@@ -70,9 +73,9 @@ class GameStateManager {
         .toList();
   }
 
-  void _update() {
+  void _update(double deltaTime) {
     for (var i = 0; i < _nextId; i++) {
-      _instances[i]?.update(this);
+      _instances[i]?.update(deltaTime, this);
     }
   }
 

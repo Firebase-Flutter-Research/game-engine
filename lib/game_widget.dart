@@ -15,8 +15,8 @@ abstract class GameWidget extends StatefulWidget {
   /// Gets called when the widget is initialized.
   void init(GameStateManager manager);
 
-  /// Gets called on every call to the game loop.
-  void update(GameStateManager manager);
+  /// Gets called on every call to the game loop. Delta time is the seconds between frames.
+  void update(double deltaTime, GameStateManager manager);
 
   /// Gets called on every call to the rebuild of the canvas.
   void draw(Canvas canvas, GameStateManager manager);
@@ -27,15 +27,20 @@ class _GameWidgetState extends State<GameWidget> {
 
   late Timer _timer;
   late GameStateManager _manager;
+  late int _lastTimestamp;
 
   @override
   void initState() {
     _manager = GameStateManager(canvasSize: widget.size);
     widget.init(_manager);
+    _lastTimestamp = DateTime.now().millisecondsSinceEpoch;
     _timer = Timer.periodic(const Duration(milliseconds: 1000 ~/ 60), (_) {
+      final now = DateTime.now().millisecondsSinceEpoch;
+      final deltaTime = (now - _lastTimestamp) / 1000;
+      _lastTimestamp = now;
       setState(() {
-        widget.update(_manager);
-        _manager._update();
+        widget.update(deltaTime, _manager);
+        _manager._update(deltaTime);
       });
       _resetPointerValues();
     });
