@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:game_engine/example/particle_simulator_objects.dart';
 import 'package:game_engine/game_engine.dart';
+
+import 'particle_simulator_objects.dart';
 
 class ParticleSimulatorWidget extends GameWidget {
   const ParticleSimulatorWidget({super.key, required super.size});

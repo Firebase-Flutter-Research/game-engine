@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:game_engine/example/particle_simulator_widget.dart';
+
+import 'particle_simulator_widget.dart';
 
 void main() {
   runApp(const MyApp());

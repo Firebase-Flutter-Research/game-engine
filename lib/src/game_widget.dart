@@ -1,4 +1,4 @@
-part of "game_engine.dart";
+part of "../game_engine.dart";
 
 abstract class GameWidget extends StatefulWidget {
   /// Size of the game canvas.

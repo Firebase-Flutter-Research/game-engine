@@ -1,4 +1,4 @@
-part of "game_engine.dart";
+part of "../game_engine.dart";
 
 class GameStateManager {
   /// Size of the game widget's canvas.
